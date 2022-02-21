@@ -29,6 +29,8 @@ import { CommentsModule } from './comments/comments.module';
       timezone: '+09:00',
       synchronize: true,
       autoLoadEntities: true,
+      logging: true,
+      logger: 'file',
     }),
     SearchModule,
     FoodsModule,

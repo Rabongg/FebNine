@@ -41,7 +41,9 @@ export class Food {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
-  @ManyToMany(() => FoodCategory, (foodCategory) => foodCategory.foods)
+  @ManyToMany(() => FoodCategory, (foodCategory) => foodCategory.foods, {
+    cascade: true,
+  })
   @JoinTable({
     name: 'food_tag',
     joinColumn: { name: 'food_id', referencedColumnName: 'id' },

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsString, Length, Max, Min } from 'class-validator';
+import { IsNumber, IsString, IsUrl, Length } from 'class-validator';
 
 export class CreateFoodDto {
   @IsString()
@@ -16,7 +16,7 @@ export class CreateFoodDto {
   @Length(1, 150)
   location: string;
 
-  @IsString()
+  @IsUrl()
   @ApiProperty({ description: '음식점 사이트' })
   @Length(1, 150)
   site: string;
