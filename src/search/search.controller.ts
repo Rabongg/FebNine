@@ -1,16 +1,5 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  Query,
-} from '@nestjs/common';
+import { Controller, Get, Query, Render, Version } from '@nestjs/common';
 import { SearchService } from './search.service';
-import { CreateSearchDto } from './dto/create-search.dto';
-import { UpdateSearchDto } from './dto/update-search.dto';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 
 @Controller('search')
@@ -21,8 +10,22 @@ export class SearchController {
     summary: '검색',
     description: '음식점 명칭으로 검색하기',
   })
-  @Get('')
-  findAll(@Query('store') store: string) {
-    return this.searchService.findStoreInfo(store);
+  @Render('result')
+  @Get('result')
+  async findStore(@Query('store') store: string) {
+    const data = await this.searchService.findStoreInfo(store);
+    return { data: data.data['documents'], keyword: store };
+  }
+
+  @Render('search')
+  @Get()
+  showFindPage() {
+    return;
+  }
+
+  @Render('result')
+  @Get('result')
+  showResultofSearch() {
+    return;
   }
 }
