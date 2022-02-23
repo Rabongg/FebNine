@@ -2,8 +2,8 @@
 
 * {
   font-family: Roboto, sans-serif;
-  padding: 0;
-  margin: 0;
+  /* padding: 0;
+  margin: 0; */
 }
 
 html, body {
@@ -52,7 +52,7 @@ html, body {
   transform: rotate(135deg);
 }
 
-.search > div > input {
+.search > div > form > input {
   color: white;
   font-size: 16px;
   background: transparent;
@@ -65,17 +65,43 @@ html, body {
   transition: width 0.5s;
 }
 
-.search > div > input::placeholder {
+.search > div > form > input::placeholder {
   color: #efefef;
   opacity: 0;
   transition: opacity 150ms ease-out;
 }
 
-.search > div > input:focus::placeholder {
+.search > div > form > input:focus::placeholder {
   opacity: 1;
 }
 
-.search > div > input:focus,
-.search > div > input:not(:placeholder-shown) {
+.search > div > form > input:focus,
+.search > div > form> input:not(:placeholder-shown) {
   width: 250px;
+}
+
+/* Navigation Bar */
+.navbar{
+  padding: 20px 10px 20px 0px;
+  background-color: #28a7e9;
+  transition: all ease 0.4s;
+}
+.navbar-brand{
+  font-size: 22px;
+  color: white !important;
+}
+.navbar .navbar-nav li a{
+  font-size: 16px;
+  color: white;
+}
+
+/* Animation */
+.animate{
+  padding: 0px 10px 0px 0px;
+  transition: all ease 0.4s;
+}
+
+/* Jumbotron */
+.jumbotron{
+  margin-top: 110px;
 }

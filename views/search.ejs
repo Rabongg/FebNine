@@ -8,12 +8,35 @@
   <title>Document</title>
 </head>
 <body>
+  <div>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#resNav">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#" class="navbar-brand">Febnine</a>
+    </div>
+    <div class="collapse navbar-collapse" id="resNav">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">List</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Team</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </nav>  <!-- End of Navigation Bar -->
+  </div>
   <div class="flexbox">
     <div class="search">
       <h1>음식점을 검색하세요</h1>
       <h3>검색 아이콘을 클릭하고 검색할 키워드를 입력하세요</h3>
       <div>
-        <input type="text" placeholder="Search . . ." required>
+        <form action="/search/result", method="get">
+          <input type="text" name="store" placeholder="Search . . ." required>
+        </form>
       </div>
     </div>
   </div>
