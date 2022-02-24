@@ -25,7 +25,7 @@ async function bootstrap() {
 
   app.enableVersioning({
     type: VersioningType.URI,
-    prefix: 'api1',
+    prefix: 'api',
   });
 
   const config = new DocumentBuilder()
