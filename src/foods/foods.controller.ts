@@ -12,7 +12,8 @@ import {
 import { FoodsService } from './foods.service';
 import { CreateFoodDto } from './dto/create-food.dto';
 import { UpdateFoodDto } from './dto/update-food.dto';
-import { ApiOperation, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { FindAllFoodQueryDto } from './dto/find-all-food-query.dto';
+import { ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { FoodCategoryType } from './entities/food-category.entity';
 
 @ApiTags('음식점 API')
@@ -39,11 +40,8 @@ export class FoodsController {
     required: false,
   })
   @Get()
-  findAll(
-    @Query('page', ParseIntPipe) page: number,
-    @Query('limit', ParseIntPipe) limit: number,
-    @Query('category') category?: FoodCategoryType,
-  ) {
+  findAll(@Query() query: FindAllFoodQueryDto) {
+    const { page, limit, category } = query;
     return this.foodsService.findAll(category, page, limit);
   }
 

@@ -1,4 +1,8 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateFoodDto } from './dto/create-food.dto';
 import { UpdateFoodDto } from './dto/update-food.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -42,56 +46,66 @@ export class FoodsService {
     page: number,
     limit: number,
   ): Promise<FoodStore[]> {
-    let foodDatas: Food[];
-    if (category) {
-      foodDatas = await this.foodRepository
-        .createQueryBuilder('food')
-        .leftJoinAndSelect('food.categories', 'food_category')
-        .select([
-          'food.id',
-          'food.name',
-          'food.location',
-          'food.createdAt',
-          'food_category.tag',
-        ])
-        .where('food_category.tag = :tag', { tag: category })
-        .offset((page - 1) * limit)
-        .limit(limit)
-        .getMany();
-    } else {
-      foodDatas = await this.foodRepository
-        .createQueryBuilder('food')
-        .leftJoinAndSelect('food.categories', 'food_category')
-        .select([
-          'food.id',
-          'food.name',
-          'food.location',
-          'food.createdAt',
-          'food_category.tag',
-        ])
-        .offset((page - 1) * limit)
-        .limit(limit)
-        .getMany();
+    try {
+      let foodDatas: Food[];
+      if (category) {
+        foodDatas = await this.foodRepository
+          .createQueryBuilder('food')
+          .leftJoinAndSelect('food.categories', 'food_category')
+          .select([
+            'food.id',
+            'food.name',
+            'food.location',
+            'food.createdAt',
+            'food_category.tag',
+          ])
+          .where('food_category.tag = :tag', { tag: category })
+          .offset((page - 1) * limit)
+          .limit(limit)
+          .getMany();
+      } else {
+        foodDatas = await this.foodRepository
+          .createQueryBuilder('food')
+          .leftJoinAndSelect('food.categories', 'food_category')
+          .select([
+            'food.id',
+            'food.name',
+            'food.location',
+            'food.createdAt',
+            'food_category.tag',
+          ])
+          .offset((page - 1) * limit)
+          .limit(limit)
+          .getMany();
+      }
+      return foodDatas;
+    } catch (err) {
+      console.log(err);
+      throw new NotFoundException('조회할 수 없습니다.');
     }
-    return foodDatas;
   }
 
   async findOne(id: number): Promise<FoodStore> {
-    const foodData = await this.foodRepository
-      .createQueryBuilder('food')
-      .leftJoinAndSelect('food.categories', 'food_category')
-      .select([
-        'food.id',
-        'food.name',
-        'food.description',
-        'food.location',
-        'food.site',
-        'food.createdAt',
-        'food_category.tag',
-      ])
-      .where('food.id = :id', { id: id })
-      .getOne();
-    return foodData;
+    try {
+      const foodData = await this.foodRepository
+        .createQueryBuilder('food')
+        .leftJoinAndSelect('food.categories', 'food_category')
+        .select([
+          'food.id',
+          'food.name',
+          'food.description',
+          'food.location',
+          'food.site',
+          'food.createdAt',
+          'food_category.tag',
+        ])
+        .where('food.id = :id', { id: id })
+        .getOne();
+      return foodData;
+    } catch (err) {
+      console.log(err);
+      throw new NotFoundException('조회할 수 없습니다.');
+    }
   }
 
   async update(id: number, updateFoodDto: UpdateFoodDto) {
@@ -123,15 +137,14 @@ export class FoodsService {
 
   async remove(id: number) {
     try {
-      await this.foodRepository
+      return await this.foodRepository
         .createQueryBuilder()
         .delete()
         .from(Food)
         .where('id = :id', { id: id })
         .execute();
     } catch (err) {
-      console.log(err);
-      throw new ConflictException('Cannot delete food');
+      throw new ConflictException('삭제할 수 없습니다.');
     }
   }
 }
