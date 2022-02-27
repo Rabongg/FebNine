@@ -36,7 +36,6 @@ export class FoodsService {
       });
       return food;
     } catch (err) {
-      console.log(err);
       throw new ConflictException('Cannot create food');
     }
   }
@@ -80,7 +79,6 @@ export class FoodsService {
       }
       return foodDatas;
     } catch (err) {
-      console.log(err);
       throw new NotFoundException('조회할 수 없습니다.');
     }
   }
@@ -103,18 +101,16 @@ export class FoodsService {
         .getOne();
       return foodData;
     } catch (err) {
-      console.log(err);
       throw new NotFoundException('조회할 수 없습니다.');
     }
   }
 
   async update(id: number, updateFoodDto: UpdateFoodDto) {
     const queryRunner = this.connection.createQueryRunner();
-
-    await queryRunner.connect();
-    await queryRunner.startTransaction();
     const { tag } = updateFoodDto;
     try {
+      await queryRunner.connect();
+      await queryRunner.startTransaction();
       if (tag) {
         await queryRunner.query(`delete from food_tag where food_id = "${id}"`);
         for (let i = 0; i < tag.length; i++) {
@@ -124,10 +120,9 @@ export class FoodsService {
         }
         delete updateFoodDto.tag;
       }
-      const food = await queryRunner.manager.update(Food, id, updateFoodDto);
+      await queryRunner.manager.update(Food, id, updateFoodDto);
       await queryRunner.commitTransaction();
     } catch (err) {
-      console.log(err);
       await queryRunner.rollbackTransaction();
       throw new ConflictException('Cannot update food');
     } finally {
