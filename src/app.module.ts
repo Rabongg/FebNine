@@ -8,6 +8,7 @@ import { join } from 'path';
 import { SearchModule } from './search/search.module';
 import { FoodsModule } from './foods/foods.module';
 import { CommentsModule } from './comments/comments.module';
+import { S3Module } from './s3/s3.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { CommentsModule } from './comments/comments.module';
     SearchModule,
     FoodsModule,
     CommentsModule,
+    S3Module,
   ],
   controllers: [AppController],
   providers: [AppService],
