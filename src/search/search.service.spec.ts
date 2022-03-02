@@ -1,6 +1,6 @@
 import { HttpModule, HttpService } from '@nestjs/axios';
 import { UnauthorizedException } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { of } from 'rxjs';
 import { SearchService } from './search.service';
@@ -48,6 +48,7 @@ describe('SearchService', () => {
 
   it('should be return error if key is wrong', async () => {
     try {
+      httpService.get = jest.fn().mockRejectedValue(new Error());
       await service.findStoreInfo('꿉당');
     } catch (err) {
       expect(err).toBeInstanceOf(UnauthorizedException);

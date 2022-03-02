@@ -12,9 +12,15 @@ export class SearchController {
   })
   @Render('result')
   @Get('result')
-  async findStore(@Query('store') store: string) {
-    const data = await this.searchService.findStoreInfo(store);
-    return { data: data.data['documents'], keyword: store };
+  async findStore(@Query('store') store: string, @Query('page') page: number) {
+    const data = await this.searchService.findStoreInfo(store, page);
+    const pages = Math.ceil(parseInt(data.data['meta'].pageable_count) / 15);
+    return {
+      data: data.data['documents'],
+      keyword: store,
+      count: data.data['meta'].pageable_count,
+      page: pages,
+    };
   }
 
   @Render('search')

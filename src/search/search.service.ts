@@ -10,17 +10,17 @@ export class SearchService {
     private httpService: HttpService,
   ) {}
 
-  async findStoreInfo(store: string) {
+  async findStoreInfo(store: string, page = 1) {
     const key = this.configService.get<string>('KAKAO_REST_API_KEY');
     const headers = {
-      Authorization: `KakaoAK 23`,
+      Authorization: `KakaoAK ${key}`,
     };
     try {
       const data = await firstValueFrom(
         this.httpService.get(
           `https://dapi.kakao.com/v2/local/search/keyword?query=${encodeURI(
             store,
-          )}`,
+          )}&page=${page}`,
           { headers: headers },
         ),
       );
