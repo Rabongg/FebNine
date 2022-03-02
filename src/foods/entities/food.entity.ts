@@ -4,10 +4,12 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { FoodCategory } from './food-category.entity';
+import { FoodImage } from './food-image.entity';
 
 @Entity()
 export class Food {
@@ -50,4 +52,7 @@ export class Food {
     inverseJoinColumn: { name: 'category_id', referencedColumnName: 'id' },
   })
   categories: FoodCategory[];
+
+  @OneToMany(() => FoodImage, (foodImages) => foodImages.foods)
+  images: FoodImage[];
 }
