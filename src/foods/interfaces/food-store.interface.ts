@@ -1,4 +1,3 @@
-import { FoodCategoryType } from '../entities/food-category.entity';
 import { Category } from './category.interface';
 
 export interface FoodStore {

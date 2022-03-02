@@ -1,7 +1,7 @@
 import { IsEnum, IsNumber, IsOptional, Min } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { FoodCategoryType } from '../entities/food-category.entity';
+import { FoodCategoryType } from '../enum/food-category.enum';
 
 export class FindAllFoodQueryDto {
   @IsNumber()

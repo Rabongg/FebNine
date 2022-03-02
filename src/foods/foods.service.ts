@@ -8,9 +8,10 @@ import { UpdateFoodDto } from './dto/update-food.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Food } from './entities/food.entity';
 import { Repository, Connection } from 'typeorm';
-import { FoodCategoryType } from './entities/food-category.entity';
+
 import { Category } from './interfaces/category.interface';
 import { FoodStore } from './interfaces/food-store.interface';
+import { FoodCategoryType } from './enum/food-category.enum';
 
 @Injectable()
 export class FoodsService {

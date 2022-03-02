@@ -14,7 +14,7 @@ import { CreateFoodDto } from './dto/create-food.dto';
 import { UpdateFoodDto } from './dto/update-food.dto';
 import { FindAllFoodQueryDto } from './dto/find-all-food-query.dto';
 import { ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
-import { FoodCategoryType } from './entities/food-category.entity';
+import { FoodCategoryType } from './enum/food-category.enum';
 
 @ApiTags('음식점 API')
 @Controller('foods')

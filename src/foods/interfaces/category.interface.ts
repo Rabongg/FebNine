@@ -1,4 +1,4 @@
-import { FoodCategoryType } from '../entities/food-category.entity';
+import { FoodCategoryType } from '../enum/food-category.enum';
 
 export interface Category {
   id?: number;
