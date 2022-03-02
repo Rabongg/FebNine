@@ -1,58 +1,182 @@
 body{
-  padding: 0 2%;
-  color: #2e3e50;
-  background: #d8dddd;
+  background:#f5f5f5;
+  margin-top:120px;}
+
+.container {
+  maring-top: 100px;
 }
-.X{
-  margin: auto;
-  padding: 1% 2%;
-  max-width: 1440px;
-  border-radius: 5px;
-  background: #ecf0f1;
-  box-shadow: 0 2px 6px 0 rgba(0,0,0, .3);
+
+/* ===== Career ===== */
+.career-form {
+background-color: #4e63d7;
+border-radius: 5px;
+padding: 0 16px;
 }
-h1,h2,h3{
-  text-align: center;
-  font-family: 'Baloo Tamma', cursive;
+
+.career-form .form-control {
+background-color: rgba(255, 255, 255, 0.2);
+border: 0;
+padding: 12px 15px;
+color: #fff;
 }
-li{
-  color: #2c3e50;
-  font-size: 10px;
-  line-height: 30px;
-  text-align: justify;
-  letter-spacing: 1px;
-  font-family: 'Raleway', serif;
+
+.career-form .form-control::-webkit-input-placeholder {
+/* Chrome/Opera/Safari */
+color: #fff;
 }
-/*SG = style grid*/
-.SG{
-  margin: 0;
+
+.career-form .form-control::-moz-placeholder {
+/* Firefox 19+ */
+color: #fff;
+}
+
+.career-form .form-control:-ms-input-placeholder {
+/* IE 10+ */
+color: #fff;
+}
+
+.career-form .form-control:-moz-placeholder {
+/* Firefox 18- */
+color: #fff;
+}
+
+.career-form .custom-select {
+background-color: rgba(255, 255, 255, 0.2);
+border: 0;
+padding: 12px 15px;
+color: #fff;
+width: 100%;
+border-radius: 5px;
+text-align: left;
+height: auto;
+background-image: none;
+}
+
+.career-form .custom-select:focus {
+-webkit-box-shadow: none;
+        box-shadow: none;
+}
+
+.career-form .select-container {
+position: relative;
+}
+
+.career-form .select-container:before {
+position: absolute;
+right: 15px;
+top: calc(50% - 14px);
+font-size: 18px;
+color: #ffffff;
+content: '\F2F9';
+font-family: "Material-Design-Iconic-Font";
+}
+
+.filter-result .job-box {
+-webkit-box-shadow: 0 0 35px 0 rgba(130, 130, 130, 0.2);
+        box-shadow: 0 0 35px 0 rgba(130, 130, 130, 0.2);
+border-radius: 10px;
+padding: 10px 35px;
+}
+
+ul {
+list-style: none; 
+}
+
+.list-disk li {
+list-style: none;
+margin-bottom: 12px;
+}
+
+.list-disk li:last-child {
+margin-bottom: 0;
+}
+
+.job-box .img-holder {
+height: 65px;
+width: 65px;
+background-color: #4e63d7;
+background-image: -webkit-gradient(linear, left top, right top, from(rgba(78, 99, 215, 0.9)), to(#5a85dd));
+background-image: linear-gradient(to right, rgba(78, 99, 215, 0.9) 0%, #5a85dd 100%);
+font-family: "Open Sans", sans-serif;
+color: #fff;
+font-size: 22px;
+font-weight: 700;
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-pack: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+-webkit-box-align: center;
+    -ms-flex-align: center;
+        align-items: center;
+border-radius: 65px;
+}
+
+.career-title {
+background-color: #4e63d7;
+color: #fff;
+padding: 15px;
+text-align: center;
+border-radius: 10px 10px 0 0;
+background-image: -webkit-gradient(linear, left top, right top, from(rgba(78, 99, 215, 0.9)), to(#5a85dd));
+background-image: linear-gradient(to right, rgba(78, 99, 215, 0.9) 0%, #5a85dd 100%);
+}
+
+.job-overview {
+-webkit-box-shadow: 0 0 35px 0 rgba(130, 130, 130, 0.2);
+        box-shadow: 0 0 35px 0 rgba(130, 130, 130, 0.2);
+border-radius: 10px;
+}
+
+@media (min-width: 992px) {
+.job-overview {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 70px;
+}
+}
+
+.job-overview .job-detail ul {
+margin-bottom: 28px;
+}
+
+.job-overview .job-detail ul li {
+opacity: 0.75;
+font-weight: 600;
+margin-bottom: 15px;
+}
+
+.job-overview .job-detail ul li i {
+font-size: 20px;
+position: relative;
+top: 1px;
+}
+
+.job-overview .overview-bottom,
+.job-overview .overview-top {
+padding: 35px;
+}
+
+.job-content ul li {
+font-weight: 600;
+opacity: 0.75;
+border-bottom: 1px solid #ccc;
+padding: 10px 5px;
+}
+
+@media (min-width: 768px) {
+.job-content ul li {
+  border-bottom: 0;
   padding: 0;
-  text-align: center;
 }
-.SG .sgLi{
-  min-width: 24%;
-  margin: 2% .35%;
-  display: inline-flex;
-  box-shadow: 0 2px 4px rgba(0,0,0, .2);
 }
-.SG .sgLi:hover{
-  box-shadow:0 5px 10px rgba(0,0,0,.15);}
-.SG .box{
-  width: 100%;
-  height: 100vh;
-  padding: 1% 2%;
-  background: #fff;
-  min-height: 200px;
-  max-height: 220px;
-  box-sizing: border-box;
-}
-/*Styles */
-.df{list-style-type: disc;}
 
-
-/* responsive grid*/
-@media (max-width: 970px){
-  .SG .sgLi{width: 180px;}}
-@media (max-width: 425px){
-  .SG .sgLi{width: 100%;}
+.job-content ul li i {
+font-size: 20px;
+position: relative;
+top: 1px;
+}
+.mb-30 {
+  margin-bottom: 30px;
 }
