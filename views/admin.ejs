@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <title>Edit profile page - Bootdey.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="http://localhost:3000/stylesheets/admin.css" rel="stylesheet">
+</head>
+<body>
+<div class="container bootstrap snippets bootdeys">
+  <div class="row">
+    <div class="col-xs-12 col-sm-9">
+      <form class="form-horizontal">
+        <div class="panel panel-default">
+          <div class="panel-body text-center">
+            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="img-circle profile-avatar" alt="User avatar">
+          </div>
+        </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+        <h4 class="panel-title">음식점 info</h4>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">음식점 종류</label>
+            <div class="col-sm-10">
+              <select class="form-control">
+                <option selected="">음식점</option>
+                <option>카페</option>
+                <option>술집</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">음식점 이름</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" value="<%=place%>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">음식점 위치(주소)</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" value="<%= address%>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">음식점 comment</label>
+            <div class="col-sm-10">
+              <textarea rows="6" class="form-control" placeholder="음식점에 대해서 쓰고 싶은 내용을 쓰세요."></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">음식점 사이트</label>
+            <div class="col-sm-10">
+              <input type="input" class="form-control" value="<%=url%>">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+        <h4 class="panel-title">Image</h4>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">썸네일(1장)</label>
+            <div class="col-sm-10">
+              <input type="file" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">일반 사진(최대 5장)</label>
+            <div class="col-sm-10">
+              <input type="file" class="form-control">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="reset" class="btn btn-default">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>
+</div>
+</body>
+</html>
