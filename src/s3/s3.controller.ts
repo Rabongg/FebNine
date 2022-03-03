@@ -17,7 +17,7 @@ export class S3Controller {
   @UseInterceptors(
     FileFieldsInterceptor([
       { name: 'thumbnail', maxCount: 1 },
-      { name: 'content', maxCount: 3 },
+      { name: 'content', maxCount: 100 },
     ]),
   )
   @ApiConsumes('multipart/form-data')
@@ -32,6 +32,6 @@ export class S3Controller {
       content: Express.Multer.File[];
     },
   ) {
-    return this.s3Service.filesupload(files);
+    return this.s3Service.filesUpload(files);
   }
 }
