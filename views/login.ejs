@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <title>Febnine - login page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://localhost:3000/stylesheets/login.css" rel="stylesheet">
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container bootstrap snippets bootdey">
+  <div class="header">
+    <ul class="nav nav-pills pull-right">
+      <li><a href="#">&nbsp;</a></li>
+    </ul>
+    <h3 class="text-muted prj-name">Febnine</h3>
+  </div>
+
+  <div style="height:auto;min-height:300px;" class="jumbotron">
+    <div class="col-md-4">
+      <img class="img-responsive center-block img-user" src="https://bootdey.com/img/Content/Manbrown2.png"> 
+    </div>
+    <div class="col-md-6 form-content">
+      <form accept-charset="utf-8" action="/users/login" method="post" id="UserLoginForm" class="form-signin">    	
+        <h1 class="form-signin-heading text-muted">Login</h1>
+        <input type="text" id="username" autofocus="autofocus" placeholder="Username" class="form-control" name="username">
+        <input type="password" id="password" placeholder="Password" class="form-control" name="password">			
+        <button type="submit" class="btn btn-lg btn-info btn-block">
+          <i class="fa fa-share"></i>
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="col-md-12">     
+  <div class="container bootstrap snippets bootdey">     
+    <footer class="footer">
+      <p>&copy; rabong 2022</p>
+    </footer>
+  </div>
+</div>
+</body>
+</html>
