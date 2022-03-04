@@ -16,7 +16,7 @@
 <div class="container bootstrap snippets bootdeys">
   <div class="row">
     <div class="col-xs-12 col-sm-9">
-      <form class="form-horizontal">
+      <form class="form-horizontal" action="/foods" method="post">
         <div class="panel panel-default">
           <div class="panel-body text-center">
             <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="img-circle profile-avatar" alt="User avatar">
@@ -30,35 +30,39 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">음식점 종류</label>
             <div class="col-sm-10">
-              <select class="form-control">
-                <option selected="">음식점</option>
-                <option>카페</option>
-                <option>술집</option>
-              </select>
+                <label><input type="checkbox" name="tag[]" value="1">술집 </label>
+                <label><input type="checkbox" name="tag[]" value="2">카페 </label>
+                <label><input type="checkbox" name="tag[]" value="3">음식점 </label>
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label">음식점 이름</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" value="<%=place%>">
+              <input type="text" class="form-control" name= "name" value="<%=place%>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label">음식점 위치(주소)</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" value="<%= address%>">
+              <input type="text" class="form-control" name="location" value="<%= address%>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label">음식점 comment</label>
             <div class="col-sm-10">
-              <textarea rows="6" class="form-control" placeholder="음식점에 대해서 쓰고 싶은 내용을 쓰세요."></textarea>
+              <textarea rows="6" class="form-control" name="description" placeholder="음식점에 대해서 쓰고 싶은 내용을 쓰세요."></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">평점</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name= "grade" placeholder="0.0 ~ 5.0">
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label">음식점 사이트</label>
             <div class="col-sm-10">
-              <input type="input" class="form-control" value="<%=url%>">
+              <input type="input" class="form-control" name="site" value="<%=url%>">
             </div>
           </div>
         </div>
