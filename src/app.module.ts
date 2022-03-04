@@ -9,6 +9,7 @@ import { SearchModule } from './search/search.module';
 import { FoodsModule } from './foods/foods.module';
 import { CommentsModule } from './comments/comments.module';
 import { S3Module } from './s3/s3.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { S3Module } from './s3/s3.module';
     FoodsModule,
     CommentsModule,
     S3Module,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

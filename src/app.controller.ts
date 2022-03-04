@@ -18,7 +18,6 @@ export class AppController {
     @Query('address') address: string,
     @Query('url') url: string,
   ) {
-    console.log(place, address, url);
     return { place, address, url };
   }
 }
