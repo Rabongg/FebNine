@@ -7,5 +7,6 @@ export interface FoodStore {
   createdAt: Date;
   categories: Category[];
   description?: string;
+  // grage?: number;
   site?: string;
 }

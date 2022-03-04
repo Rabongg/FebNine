@@ -8,6 +8,7 @@ import {
   Delete,
   Query,
   ParseIntPipe,
+  Render,
 } from '@nestjs/common';
 import { FoodsService } from './foods.service';
 import { CreateFoodDto } from './dto/create-food.dto';
@@ -34,15 +35,16 @@ export class FoodsController {
     summary: '음식점리스트',
     description: '음식점 전체 조회',
   })
-  @ApiQuery({
-    name: 'category',
-    enum: FoodCategoryType,
-    required: false,
-  })
+  @ApiQuery({ type: FindAllFoodQueryDto })
+  @Render('food')
   @Get()
-  findAll(@Query() query: FindAllFoodQueryDto) {
-    const { page, limit, category } = query;
-    return this.foodsService.findAll(category, page, limit);
+  async findAll(
+    @Query('page') page = 1,
+    @Query('limit') limit = 5,
+    @Query('category') category = undefined,
+  ) {
+    const data = await this.foodsService.findAll(category, page, limit);
+    return { data };
   }
 
   @ApiOperation({

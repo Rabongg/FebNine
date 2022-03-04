@@ -56,7 +56,9 @@ export class FoodsService {
             'food.id',
             'food.name',
             'food.location',
+            'food.site',
             'food.createdAt',
+            'food.grade',
             'food_category.tag',
           ])
           .where('food_category.tag = :tag', { tag: category })
@@ -71,7 +73,9 @@ export class FoodsService {
             'food.id',
             'food.name',
             'food.location',
+            'food.site',
             'food.createdAt',
+            'food.grade',
             'food_category.tag',
           ])
           .offset((page - 1) * limit)

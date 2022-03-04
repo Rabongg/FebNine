@@ -85,6 +85,7 @@ describe('FoodsService', () => {
         location: 'suwon',
         site: 'https://naver.com',
         tag: [1, 2],
+        grade: 4.5,
       };
       categories = [
         {

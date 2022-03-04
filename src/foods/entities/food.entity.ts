@@ -37,6 +37,9 @@ export class Food {
   })
   site: string;
 
+  @Column({ type: 'float', nullable: true })
+  grade: number;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
