@@ -3,13 +3,12 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
 import { SearchModule } from './search/search.module';
 import { FoodsModule } from './foods/foods.module';
 import { CommentsModule } from './comments/comments.module';
 import { S3Module } from './s3/s3.module';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -39,6 +38,7 @@ import { UsersModule } from './users/users.module';
     CommentsModule,
     S3Module,
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

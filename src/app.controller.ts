@@ -1,17 +1,26 @@
-import { Controller, Get, Query, Render, Version } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Query,
+  Redirect,
+  Render,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Render('food')
+  @Redirect('/foods', 302)
   @Get()
   getFoodPage(): string {
     return;
   }
 
   @Render('admin')
+  @UseGuards(AuthGuard('jwt'))
   @Get('admin')
   getAdminPage(
     @Query('place') place: string,

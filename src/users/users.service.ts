@@ -27,17 +27,17 @@ export class UsersService {
     }
   }
 
-  async login(userDto: UserDto) {
+  async validateUser(userDto: UserDto) {
     try {
       const { username, password } = userDto;
       const user = await this.userRepository.findOne({ username });
       if (user) {
         const isValid = await Hash.validate(user.password, password);
         if (isValid) {
-          return true;
+          return { username: user.username, id: user.id };
         }
       }
-      throw new UnauthorizedException('아이디와 비밀번호가 일치하지 않습니다.');
+      return false;
     } catch (err) {
       console.log(err);
       throw new UnauthorizedException('아이디와 비밀번호를 확인해주세요');
