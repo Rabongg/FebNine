@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumberString, IsString, IsUrl, Length } from 'class-validator';
+import {
+  IsNumber,
+  IsNumberString,
+  IsString,
+  IsUrl,
+  Length,
+} from 'class-validator';
 
 export class CreateFoodDto {
   @IsString()
@@ -25,7 +31,7 @@ export class CreateFoodDto {
   @ApiProperty({ description: '음식점 카테고리' })
   tag: number[];
 
-  @IsNumberString()
+  @IsNumber()
   @ApiProperty({ description: '음식점 평점' })
   grade: number;
 }
