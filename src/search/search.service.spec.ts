@@ -1,5 +1,5 @@
 import { HttpModule, HttpService } from '@nestjs/axios';
-import { UnauthorizedException } from '@nestjs/common';
+import { BadRequestException } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { of } from 'rxjs';
@@ -51,7 +51,7 @@ describe('SearchService', () => {
       httpService.get = jest.fn().mockRejectedValue(new Error());
       await service.findStoreInfo('꿉당');
     } catch (err) {
-      expect(err).toBeInstanceOf(UnauthorizedException);
+      expect(err).toBeInstanceOf(BadRequestException);
       expect(err.message).toBe('유효하지 않은 key입니다.');
     }
   });

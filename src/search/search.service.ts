@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { firstValueFrom, map } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class SearchService {
@@ -26,7 +26,7 @@ export class SearchService {
       );
       return data;
     } catch (err) {
-      throw new UnauthorizedException('유효하지 않은 key입니다.');
+      throw new BadRequestException('유효하지 않은 key입니다.');
     }
   }
 }

@@ -1,5 +1,5 @@
 import { HttpModule, HttpService } from '@nestjs/axios';
-import { UnauthorizedException } from '@nestjs/common';
+import { BadRequestException } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { of } from 'rxjs';
@@ -41,7 +41,7 @@ describe('SearchController', () => {
       httpService.get = jest.fn().mockImplementationOnce(() => {
         return of(data);
       });
-      expect(await searchController.findStore('꿉당')).toStrictEqual({
+      expect(await searchController.findStore('꿉당', 1)).toStrictEqual({
         data: data.data.documents,
         keyword: '꿉당',
       });
@@ -49,9 +49,9 @@ describe('SearchController', () => {
 
     it('should return error when key is wrong', async () => {
       try {
-        await searchController.findStore('꿉당');
+        await searchController.findStore('꿉당', 1);
       } catch (err) {
-        expect(err).toBeInstanceOf(UnauthorizedException);
+        expect(err).toBeInstanceOf(BadRequestException);
         expect(err.message).toBe('유효하지 않은 key입니다.');
       }
     });
