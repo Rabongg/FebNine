@@ -12,6 +12,7 @@ export class SearchService {
 
   async findStoreInfo(store: string, page = 1) {
     const key = this.configService.get<string>('KAKAO_REST_API_KEY');
+    page = isNaN(page) ? 1 : page;
     const headers = {
       Authorization: `KakaoAK ${key}`,
     };
