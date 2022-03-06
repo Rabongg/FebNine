@@ -32,6 +32,7 @@ export class S3Controller {
       content: Express.Multer.File[];
     },
   ) {
+    console.log(files);
     return this.s3Service.filesUpload(files);
   }
 }

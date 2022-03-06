@@ -4,11 +4,13 @@ import { S3 } from 'aws-sdk';
 import * as randomstring from 'randomstring';
 import * as sharp from 'sharp';
 import * as webpConverter from 'webp-converter';
+import { FileImageType } from './enum/file-image.enum';
 
 @Injectable()
 export class S3Service {
   private AWS_S3_BUCKET: string;
   private s3: S3;
+  private url: string;
 
   constructor(private configService: ConfigService) {
     this.s3 = new S3({
@@ -16,13 +18,14 @@ export class S3Service {
       secretAccessKey: this.configService.get('AWS_SECRET_KEY'),
     });
     this.AWS_S3_BUCKET = this.configService.get('S3_BUCKET');
+    this.url = this.configService.get('S3_URL');
   }
 
   async filesUpload(files: {
     thumbnail: Express.Multer.File;
     content: Express.Multer.File[];
   }) {
-    let contentPath;
+    let contentPath: string;
     const { thumbnail, content } = files;
     const imagePath = [];
     const imageType = [
@@ -39,37 +42,44 @@ export class S3Service {
       if (!imageType.includes(file.mimetype))
         throw new BadRequestException('사진이 아닙니다');
     });
-    const thumbnailPath = await this.s3Upload(thumbnail[0], 'thumbnail');
+    const thumbnailPath = await this.s3Upload(
+      thumbnail[0],
+      FileImageType.thumbnail,
+    );
     imagePath.push({
-      thumbnail: thumbnailPath,
+      thumbnail: `${this.url}/${thumbnailPath}`,
     });
     for (let i = 0; i < content.length; i++) {
-      contentPath = await this.s3Upload(content[i], 'content');
-      imagePath.push({ content: contentPath });
+      contentPath = await this.s3Upload(content[i], FileImageType.content);
+      imagePath.push({ content: `${this.url}/${contentPath}` });
     }
     console.log(new Date().getTime() - now);
     return imagePath;
   }
 
-  async s3Upload(file, type: string) {
+  async s3Upload(file: any, type: FileImageType) {
     try {
       const path = await this.s3
         .upload({
           Bucket: `${this.AWS_S3_BUCKET}/food/${type}`,
-          Body: await this.convertToWebp(file.buffer, file.originalname),
+          Body: await this.convertToWebp(file.buffer, type),
           Key: `${randomstring.generate()}.webp`,
-          ContentType: file.mimetype,
+          ContentType: 'webp',
         })
         .promise();
-      return path.Location;
+      return path.Key;
     } catch (err) {
       console.log(err);
     }
   }
 
-  async convertToWebp(file: Buffer, fileName: string) {
+  async convertToWebp(file: Buffer, type: FileImageType) {
     try {
-      return sharp(file).resize({ width: 100, height: 100 }).toFormat('webp');
+      if (type == FileImageType.content) {
+        return sharp(file).toFormat('webp');
+      } else {
+        return sharp(file).resize({ width: 100, height: 100 }).toFormat('webp');
+      }
     } catch (err) {
       console.log(err);
     }
