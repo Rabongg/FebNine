@@ -56,6 +56,8 @@ export class Food {
   })
   categories: FoodCategory[];
 
-  @OneToMany(() => FoodImage, (foodImages) => foodImages.foods)
+  @OneToMany(() => FoodImage, (foodImages) => foodImages.foods, {
+    cascade: true,
+  })
   images: FoodImage[];
 }
