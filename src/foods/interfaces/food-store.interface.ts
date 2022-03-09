@@ -1,4 +1,5 @@
 import { Category } from './category.interface';
+import { FoodImage } from './food-image.interface';
 
 export interface FoodStore {
   id: number;
@@ -9,4 +10,5 @@ export interface FoodStore {
   description?: string;
   grade: number;
   site?: string;
+  images: FoodImage[];
 }
