@@ -5,7 +5,6 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SearchModule } from './search/search.module';
 import { FoodsModule } from './foods/foods.module';
-import { CommentsModule } from './comments/comments.module';
 import { S3Module } from './s3/s3.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
@@ -35,7 +34,6 @@ import { AuthModule } from './auth/auth.module';
     }),
     SearchModule,
     FoodsModule,
-    CommentsModule,
     S3Module,
     UsersModule,
     AuthModule,
