@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <title>product full detail - Bootdey.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link href="http://localhost:3000/stylesheets/detail.css" rel="stylesheet">
+</head>
+<body>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+<div class="container">
+    <!-- product -->
+    <div class="product-content product-wrap clearfix product-deatil">
+      <div class="row">
+        <div class="col-md-5 col-sm-12 col-xs-12">
+          <div class="product-image">
+            <div id="myCarousel-2" class="carousel slide">
+              <ol class="carousel-indicators">
+                <li data-target="#myCarousel-2" data-slide-to="0" class="active"></li>
+                <% for (let i=1; i< data.images.length; i++) { %>
+                  <li data-target="#myCarousel-2" data-slide-to="i" class=""></li>
+                <% } %>
+              </ol>
+                <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="item active">
+                  <img src="<%= data.images[0].url%>" class="img-responsive" alt="" />
+                </div>
+                <% for (let i=1; i< data.images.length; i++) { %>
+                  <div class="item">
+                    <img src="<%= data.images[i].url%>" class="img-responsive" alt="" />
+                  </div>
+                <% } %>
+              </div>
+              <a class="left carousel-control" href="#myCarousel-2" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
+              <a class="right carousel-control" href="#myCarousel-2" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-md-offset-1 col-sm-12 col-xs-12">
+          <h2 class="name">
+            <%= data.name %>
+            <br />
+            <i class="fa fa-star fa-2x text-primary"></i>
+            <i class="fa fa-star fa-2x text-primary"></i>
+            <i class="fa fa-star fa-2x text-primary"></i>
+            <i class="fa fa-star fa-2x text-primary"></i>
+            <i class="fa fa-star fa-2x text-muted"></i>
+          </h2>
+          <hr />
+          <h4 class="price-container">
+            <%= data.location %>
+          </h4>
+          <hr />
+          <div class="description description-tabs">
+            <div id="myTabContent" class="tab-content">
+              <div class="tab-pane fade active in" id="more-information">
+                <br />
+                <p>
+                  <%= data.description %>
+                </p>
+              </div>
+              <br />
+              <hr />
+              <h5><a href="<%= data.site%>">매장 바로가기</a></h5> <br/><br/>
+              <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                  <div class="btn-group pull-right">
+                    <button class="btn btn-white btn-default"><i class="fa fa-star"></i> 수정하기</button>
+                    <button class="btn btn-white btn-default"><i class="fa fa-envelope"></i> 삭제하기</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end product -->
+</div>
+</body>
+</html>
