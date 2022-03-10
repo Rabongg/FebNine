@@ -5,6 +5,7 @@ import {
   Post,
   Render,
   Req,
+  Res,
   UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -33,8 +34,16 @@ export class UsersController {
   })
   @UseGuards(AuthGuard('local'))
   @Post('/login')
-  login(@Req() req: Record<string, any>) {
-    return this.authService.login(req.user);
+  async login(
+    @Req() req: Record<string, any>,
+    @Res() res: Record<string, any>,
+  ) {
+    res.cookie('febnine', await this.authService.login(req.user), {
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+      httpOnly: true,
+      sameSite: 'strict',
+    });
+    return res.redirect('/foods');
   }
 
   @ApiOperation({
