@@ -3,9 +3,11 @@ import {
   IsNumber,
   IsNumberString,
   IsString,
-  IsUrl,
   Length,
+  Max,
+  Min,
 } from 'class-validator';
+import { Site } from '../decorator/site.decorator';
 
 export class CreateFoodDto {
   @IsString()
@@ -22,7 +24,9 @@ export class CreateFoodDto {
   @Length(1, 150)
   location: string;
 
-  @IsUrl()
+  @Site('http://place.map.kakao.com', {
+    message: '잘못된 url입니다.',
+  })
   @ApiProperty({ description: '음식점 사이트' })
   @Length(1, 150)
   site: string;
@@ -32,6 +36,8 @@ export class CreateFoodDto {
   tag: number[];
 
   @IsNumber()
+  @Max(5)
+  @Min(1)
   @ApiProperty({ description: '음식점 평점' })
   grade: number;
 }
