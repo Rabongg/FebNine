@@ -6,8 +6,8 @@ import {
   Render,
   UseGuards,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { AppService } from './app.service';
+import { JwtAuthGuard } from './auth/jwt-auth.guard';
 
 @Controller()
 export class AppController {
@@ -20,7 +20,7 @@ export class AppController {
   }
 
   @Render('admin')
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(JwtAuthGuard)
   @Get('admin')
   getAdminPage(
     @Query('place') place: string,
