@@ -9,12 +9,21 @@ import {
   Query,
   ParseIntPipe,
   Render,
+  UseInterceptors,
+  UploadedFiles,
 } from '@nestjs/common';
 import { FoodsService } from './foods.service';
 import { CreateFoodDto } from './dto/create-food.dto';
 import { UpdateFoodDto } from './dto/update-food.dto';
 import { FindAllFoodQueryDto } from './dto/find-all-food-query.dto';
-import { ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiConsumes,
+  ApiOperation,
+  ApiQuery,
+  ApiTags,
+} from '@nestjs/swagger';
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { FoodCategoryType } from './enum/food-category.enum';
 
 @ApiTags('음식점 API')
@@ -26,9 +35,23 @@ export class FoodsController {
     summary: '음식점 등록',
     description: '음식점 등록',
   })
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(
+    FileFieldsInterceptor([
+      { name: 'thumbnail', maxCount: 1 },
+      { name: 'content', maxCount: 100 },
+    ]),
+  )
   @Post()
-  create(@Body() createFoodDto: CreateFoodDto) {
-    return this.foodsService.create(createFoodDto);
+  create(
+    @UploadedFiles()
+    files: {
+      thumbnail: Express.Multer.File;
+      content: Express.Multer.File[];
+    },
+    @Body() createFoodDto: CreateFoodDto,
+  ) {
+    return this.foodsService.create(files, createFoodDto);
   }
 
   @ApiOperation({
@@ -40,9 +63,10 @@ export class FoodsController {
   @Get()
   async findAll(
     @Query('page') page = 1,
-    @Query('limit') limit = 5,
+    @Query('limit') limit = 0,
     @Query('category') category = undefined,
   ) {
+    console.log(page, limit);
     const data = await this.foodsService.findAll(category, page, limit);
     return { data };
   }
@@ -51,9 +75,11 @@ export class FoodsController {
     summary: '음식점 상세조회',
     description: '음식점 상세조회',
   })
+  @Render('detail')
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.foodsService.findOne(id);
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    const data = await this.foodsService.findOne(id);
+    return { data };
   }
 
   @ApiOperation({
