@@ -12,11 +12,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link href="http://localhost:3000/stylesheets/result.css" rel="stylesheet"/>  
 </head>
-<script>
+<script nonce="EDNnf03nceIOfn39fn3e9h3sdfa">
   function send_data(place, address, url) {
     location.href = `/admin?place=${place}&address=${address}&url=${url}`;
   }
-
 </script>
 <body>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" integrity="sha256-3sPp8BkKUE7QyPSl6VfBByBroQbKxKG7tsusY2mhbVY=" crossorigin="anonymous" />
@@ -53,7 +52,7 @@
                   </div>
                 </div>
                 <div class="job-right my-4 flex-shrink-0">
-                  <button class="btn d-block w-100 d-sm-inline-block btn-light" onclick="send_data('<%=data[i].place_name %>', '<%= data[i].address_name%>', '<%=data[i].place_url%>')" i>리스트 추가</button>
+                  <button class="btn d-block w-100 d-sm-inline-block btn-light" onclick="send_data('<%=data[i].place_name %>', '<%= data[i].address_name%>', '<%=data[i].place_url%>')" nonce="EDNnf03nceIOfn39fn3e9h3sdfa">리스트 추가</button>
                 </div>
             </div>
             <% } %>
