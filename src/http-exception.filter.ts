@@ -15,7 +15,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const status = exception.getStatus();
     const message = exception.getResponse();
 
-    response.render('error', { error: status });
+    if (status === 401) response.redirect('/users');
+    else response.render('error', { error: status });
     // response.status(status).json({
     //   statusCode: status,
     //   timestamp: new Date().toISOString(),
