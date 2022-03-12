@@ -4,10 +4,47 @@ import { AppModule } from './app.module';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { join } from 'path';
+import helmet from 'helmet';
 import { HttpExceptionFilter } from './http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  app.use(
+    helmet.contentSecurityPolicy({
+      directives: {
+        defaultSrc: ["'self'"],
+        styleSrc: [
+          "'self'",
+          'cdn.jsdelivr.net',
+          'maxcdn.bootstrapcdn.com',
+          'netdna.bootstrapcdn.com',
+          'fonts.googleapis.com',
+          'cdnjs.cloudflare.com',
+        ],
+        scriptSrc: [
+          "'self'",
+          'code.jquery.com',
+          'cdn.jsdelivr.net',
+          'netdna.bootstrapcdn.com',
+          'ajax.googleapis.com',
+          "'sha256-GHn79/tVTUjiWj5V/e7EJkPiydtSFzLpocylRcRRqEk='",
+          "'nonce-EDNnf03nceIOfn39fn3e9h3sdfa'",
+        ],
+        scriptSrcAttr: ["'self'", 'localhost:3000', "'unsafe-inline'"],
+        imgSrc: [
+          "'self'",
+          'static.hanrabong.com',
+          'bootdey.com',
+          'www.bootdey.com',
+          'validator.swagger.io',
+        ],
+      },
+    }),
+  );
+
+  app.use(helmet.hidePoweredBy());
+  app.use(helmet.xssFilter());
 
   app.useGlobalPipes(
     new ValidationPipe({
