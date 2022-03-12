@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { CreateFoodDto } from './dto/create-food.dto';
 import { UpdateFoodDto } from './dto/update-food.dto';
-import { InjectRepository } from '@nestjs/typeorm';
+import { InjectConnection, InjectRepository } from '@nestjs/typeorm';
 import { Food } from './entities/food.entity';
 import { Repository, Connection } from 'typeorm';
 import { Category } from './interfaces/category.interface';
@@ -20,6 +20,7 @@ export class FoodsService {
   constructor(
     @InjectRepository(Food)
     private readonly foodRepository: Repository<Food>,
+    @InjectConnection()
     private connection: Connection,
     private readonly s3Service: S3Service,
   ) {}
@@ -114,6 +115,7 @@ export class FoodsService {
         .where('food.id = :id', { id: id })
         .andWhere('food_image.type = :type', { type: FoodImageType.content })
         .getOne();
+      if (!foodData) throw new NotFoundException('조회할 수 없습니다.');
       return foodData;
     } catch (err) {
       throw new NotFoundException('조회할 수 없습니다.');
