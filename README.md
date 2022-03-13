@@ -13,8 +13,9 @@
 ```
 $ yarn
 ```
+</br>
 
-- development 모드로 실행 
+### development 모드로 실행
 ```
 $ yarn start:dev
 ```
@@ -22,6 +23,14 @@ $ yarn start:dev
 - swagger document
 [swagger 문서](http://localhost:3000/api)
 
+</br>
+
+### production 모드
+
+- docker-compose 수정 해주기
+- /etc/nginx/default.conf 파일 생성해주기
+
+</br>
 
 ### docker로 실행
 - docker-compose 이용
