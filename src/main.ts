@@ -21,6 +21,7 @@ async function bootstrap() {
           'netdna.bootstrapcdn.com',
           'fonts.googleapis.com',
           'cdnjs.cloudflare.com',
+          'febnine.hanrabong.com',
         ],
         scriptSrc: [
           "'self'",
@@ -31,6 +32,7 @@ async function bootstrap() {
           "'sha256-GHn79/tVTUjiWj5V/e7EJkPiydtSFzLpocylRcRRqEk='",
           "'nonce-EDNnf03nceIOfn39fn3e9h3sdfa'",
           'place.map.kakao.com',
+          'febnine.hanrabong.com',
         ],
         scriptSrcAttr: ["'self'", "'unsafe-inline'"],
         imgSrc: [
@@ -41,6 +43,7 @@ async function bootstrap() {
           'validator.swagger.io',
           'place.map.kakao.com',
           'cdn.jsdelivr.net',
+          'febnine.hanrabong.com',
         ],
       },
     }),
