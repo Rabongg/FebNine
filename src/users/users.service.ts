@@ -22,7 +22,6 @@ export class UsersService {
       const encryptPassword = await Hash.encrypt(password);
       await this.userRepository.save({ username, password: encryptPassword });
     } catch (err) {
-      console.log(err);
       throw new ConflictException('문재가 발생했습니다.');
     }
   }
@@ -36,10 +35,10 @@ export class UsersService {
         if (isValid) {
           return { username: user.username, id: user.id };
         }
+        throw new UnauthorizedException('아이디와 비밀번호를 확인해주세요');
       }
       return false;
     } catch (err) {
-      console.log(err);
       throw new UnauthorizedException('아이디와 비밀번호를 확인해주세요');
     }
   }

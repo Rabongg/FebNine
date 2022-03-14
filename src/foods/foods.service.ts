@@ -56,7 +56,6 @@ export class FoodsService {
       });
       return food;
     } catch (err) {
-      console.log(err);
       throw new ConflictException('Cannot create food');
     }
   }
