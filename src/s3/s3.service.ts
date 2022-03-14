@@ -76,9 +76,12 @@ export class S3Service {
   async convertToWebp(file: Buffer, type: FileImageType) {
     try {
       if (type == FileImageType.content) {
-        return sharp(file).toFormat('webp');
+        return sharp(file).withMetadata().toFormat('webp');
       } else {
-        return sharp(file).resize({ width: 100, height: 100 }).toFormat('webp');
+        return sharp(file)
+          .resize({ width: 100, height: 100 })
+          .withMetadata()
+          .toFormat('webp');
       }
     } catch (err) {
       console.log(err);
