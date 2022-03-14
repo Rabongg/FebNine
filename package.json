@@ -37,6 +37,7 @@
     "class-validator": "^0.13.2",
     "ejs": "^3.1.6",
     "helmet": "^5.0.2",
+    "moment": "^2.29.1",
     "multer": "^1.4.4",
     "multer-s3": "^2.10.0",
     "mysql2": "^2.3.3",
@@ -50,7 +51,8 @@
     "sharp": "^0.30.2",
     "swagger-ui-express": "^4.3.0",
     "typeorm": "^0.2.42",
-    "webp-converter": "^2.3.3"
+    "webp-converter": "^2.3.3",
+    "winston": "^3.6.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
