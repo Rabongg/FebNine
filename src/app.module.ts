@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
@@ -8,6 +8,9 @@ import { FoodsModule } from './foods/foods.module';
 import { S3Module } from './s3/s3.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { LoggerMiddleware } from './logger/logger.middleware';
+import { MyLogger } from './logger/logger.service';
+import { LoggerModule } from './logger/logger.module';
 
 @Module({
   imports: [
@@ -37,8 +40,15 @@ import { AuthModule } from './auth/auth.module';
     S3Module,
     UsersModule,
     AuthModule,
+    LoggerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
+  }
+}

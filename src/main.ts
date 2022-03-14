@@ -6,9 +6,12 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { join } from 'path';
 import helmet from 'helmet';
 import { HttpExceptionFilter } from './http-exception.filter';
+import { MyLogger } from './logger/logger.service';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    logger: false,
+  });
 
   app.use(
     helmet.contentSecurityPolicy({
@@ -62,7 +65,9 @@ async function bootstrap() {
       },
     }),
   );
-  app.useGlobalFilters(new HttpExceptionFilter());
+  const logger = app.get<MyLogger>(MyLogger);
+  app.useLogger(logger);
+  app.useGlobalFilters(new HttpExceptionFilter(logger));
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('ejs');
