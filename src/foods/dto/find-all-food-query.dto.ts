@@ -19,6 +19,7 @@ export class FindAllFoodQueryDto {
   @IsEnum(FoodCategoryType)
   @IsOptional()
   @ApiProperty({
+    type: 'enum',
     default: undefined,
     required: false,
     description: '가게 카테고리',
