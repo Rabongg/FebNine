@@ -19,7 +19,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     this.logger.error(`${request.url}:[${status}]: ${message['message']}`);
     if (status === 401) {
-      response.redirect('/users');
+      response.redirect('/foods');
     } else {
       response.render('error', { error: status });
     }
