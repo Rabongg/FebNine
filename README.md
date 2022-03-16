@@ -13,7 +13,7 @@ $ yarn
 ```
 </br>
 
-### development 모드로 실행
+#### development 모드로 실행
 ```
 $ yarn start:dev
 ```
