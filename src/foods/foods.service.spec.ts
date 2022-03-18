@@ -1,6 +1,9 @@
 import { ConflictException, NotFoundException } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getConnectionToken, getRepositoryToken } from '@nestjs/typeorm';
+import { S3Module } from '@src/s3/s3.module';
+import { S3Service } from '@src/s3/s3.service';
 import { Connection, Repository } from 'typeorm';
 import { CreateFoodDto } from './dto/create-food.dto';
 import { Food } from './entities/food.entity';
@@ -46,11 +49,14 @@ const MockConnection = () => ({
 
 describe('FoodsService', () => {
   let service: FoodsService;
+  let s3Service: S3Service;
   let foodRepository: MockRepository<Food>;
   let connection: MockConnection;
+  let connection1: MockConnection;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [S3Module, ConfigModule],
       providers: [
         FoodsService,
         {
@@ -61,18 +67,23 @@ describe('FoodsService', () => {
           provide: getConnectionToken(),
           useValue: MockConnection(),
         },
+        S3Service,
       ],
     }).compile();
 
     service = module.get<FoodsService>(FoodsService);
+    s3Service = module.get<S3Service>(S3Service);
     foodRepository = module.get<MockRepository<Food>>(getRepositoryToken(Food));
     connection = module.get<MockConnection>(getConnectionToken());
+    connection1 = module.get<MockConnection>(getConnectionToken());
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
     expect(foodRepository).toBeDefined();
+    expect(s3Service).toBeDefined();
     expect(connection).toBeDefined();
+    expect(connection).toStrictEqual(connection1);
   });
 
   describe('create method', () => {
@@ -102,7 +113,7 @@ describe('FoodsService', () => {
       foodRepository.save.mockImplementationOnce((createFoodDto) => {
         return createFoodDto;
       });
-      expect(await service.create(createFoodDto)).toStrictEqual({
+      expect(await service.create('', createFoodDto)).toStrictEqual({
         ...createFoodDto,
         categories,
       });
@@ -113,7 +124,7 @@ describe('FoodsService', () => {
         foodRepository.save.mockImplementationOnce(() => {
           throw new Error();
         });
-        await service.create(createFoodDto);
+        await service.create('', createFoodDto);
       } catch (err) {
         expect(err).toBeInstanceOf(ConflictException);
         expect(err.message).toBe('Cannot create food');
