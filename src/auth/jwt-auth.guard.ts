@@ -5,10 +5,13 @@ import { AuthGuard } from '@nestjs/passport';
 export class JwtAuthGuard extends AuthGuard('jwt') {
   canActivate(context: ExecutionContext) {
     const request = context.switchToHttp().getRequest();
-    if (request?.headers?.cookie)
-      request.headers.authorization = `Bearer ${
-        request.headers.cookie.split('=')[1]
-      }`;
+    if (request?.headers?.cookie) {
+      const data = request.headers.cookie.split('; ');
+      data.forEach((values: string) => {
+        if (values.split('=')[0] === 'febnine')
+          request.headers.authorization = `Bearer ${values.split('=')[1]}`;
+      });
+    }
     return super.canActivate(context);
   }
 }
