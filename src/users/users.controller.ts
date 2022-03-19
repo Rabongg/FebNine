@@ -41,6 +41,7 @@ export class UsersController {
     res.cookie('febnine', await this.authService.login(req.user), {
       maxAge: 1000 * 60 * 60 * 24 * 7,
       httpOnly: true,
+      secure: true,
       sameSite: 'strict',
     });
     return res.redirect('/foods');
