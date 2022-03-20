@@ -1,12 +1,13 @@
 import { Injectable, LoggerService, LogLevel } from '@nestjs/common';
 import { createLogger, transports, Logger, format } from 'winston';
 import * as moment from 'moment';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class MyLogger implements LoggerService {
   private logger: Logger;
 
-  constructor() {
+  constructor(private configService: ConfigService) {
     this.logger = createLogger({
       format: format.combine(
         format.colorize({
@@ -31,7 +32,7 @@ export class MyLogger implements LoggerService {
         }),
         new transports.Console({
           level: 'debug',
-          silent: process.env.NODE_ENV === 'production',
+          // silent: process.env.NODE_ENV === 'production',
         }),
         new transports.File({
           level: 'info',
@@ -43,9 +44,9 @@ export class MyLogger implements LoggerService {
           silent: process.env.NODE_ENV !== 'production',
           format: format.combine(
             format.printf((i) =>
-              i.level === 'info'
-                ? `${i.level}: ${i.timestamp} ${i.message}`
-                : '',
+              i.level == 'error'
+                ? ''
+                : `[${i.level}]:${[i.timestamp]}:${i.message}`,
             ),
           ),
         }),
