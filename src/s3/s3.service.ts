@@ -35,7 +35,6 @@ export class S3Service {
       'image/jpg',
       'image/gif',
     ];
-    const now = new Date().getTime();
     if (!imageType.includes(thumbnail[0].mimetype))
       throw new BadRequestException('사진이 아닙니다.');
     content.forEach((file) => {
@@ -53,7 +52,6 @@ export class S3Service {
       contentPath = await this.s3Upload(content[i], FileImageType.content);
       imagePath.push({ content: `${this.url}/${contentPath}` });
     }
-    console.log(new Date().getTime() - now);
     return imagePath;
   }
 
@@ -62,9 +60,10 @@ export class S3Service {
       const path = await this.s3
         .upload({
           Bucket: `${this.AWS_S3_BUCKET}/food/${type}`,
-          Body: await this.convertToWebp(file.buffer, type),
-          Key: `${randomstring.generate()}.webp`,
-          ContentType: 'webp',
+          Body: file.buffer,
+          // Body: await this.convertToWebp(file.buffer, type),
+          Key: `${randomstring.generate()}.${file.mimetype.split('/')[1]}`,
+          ContentType: `${file.mimetype.split('/')[1]}`,
         })
         .promise();
       return path.Key;
@@ -78,10 +77,9 @@ export class S3Service {
       if (type == FileImageType.content) {
         return sharp(file).withMetadata().toFormat('webp');
       } else {
-        return sharp(file)
-          .resize({ width: 100, height: 100 })
-          .withMetadata()
-          .toFormat('webp');
+        // return sharp(file).resize({ width: 100, height: 100 }).withMetadata();
+        return sharp(file).withMetadata().toFormat('webp');
+        // .toFormat('webp');
       }
     } catch (err) {
       console.log(err);
