@@ -99,7 +99,7 @@
                       <div class="event-img">
                         <% for(let j=0; j < data[i].images.length; j++) { %>
                           <% if(data[i].images[j].type == "썸네일") { %>
-                            <img src="<%= data[i].images[j].url %>" alt="">
+                            <img src="<%= data[i].images[j].url %>" alt="" loading="lazy">
                           <% } %>
                         <% } %>
                       </div>

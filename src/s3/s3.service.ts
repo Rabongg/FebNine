@@ -60,10 +60,10 @@ export class S3Service {
       const path = await this.s3
         .upload({
           Bucket: `${this.AWS_S3_BUCKET}/food/${type}`,
-          Body: file.buffer,
-          // Body: await this.convertToWebp(file.buffer, type),
-          Key: `${randomstring.generate()}.${file.mimetype.split('/')[1]}`,
-          ContentType: `${file.mimetype.split('/')[1]}`,
+          // Body: file.buffer,
+          Body: await this.convertToWebp(file.buffer, type),
+          Key: `${randomstring.generate()}.avif`,
+          ContentType: `avif`,
         })
         .promise();
       return path.Key;
@@ -75,10 +75,10 @@ export class S3Service {
   async convertToWebp(file: Buffer, type: FileImageType) {
     try {
       if (type == FileImageType.content) {
-        return sharp(file).withMetadata().toFormat('webp');
+        return sharp(file).rotate().avif({ quality: 40 }).toBuffer();
       } else {
         // return sharp(file).resize({ width: 100, height: 100 }).withMetadata();
-        return sharp(file).withMetadata().toFormat('webp');
+        return sharp(file).rotate().avif({ quality: 40 }).toBuffer();
         // .toFormat('webp');
       }
     } catch (err) {
