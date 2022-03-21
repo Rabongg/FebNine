@@ -75,10 +75,14 @@ export class S3Service {
   async convertToWebp(file: Buffer, type: FileImageType) {
     try {
       if (type == FileImageType.content) {
-        return sharp(file).rotate().avif({ quality: 40 }).toBuffer();
+        return sharp(file).rotate().avif().toBuffer();
       } else {
         // return sharp(file).resize({ width: 100, height: 100 }).withMetadata();
-        return sharp(file).rotate().avif({ quality: 40 }).toBuffer();
+        return sharp(file)
+          .rotate()
+          .resize({ width: 100, height: 100 })
+          .avif()
+          .toBuffer();
         // .toFormat('webp');
       }
     } catch (err) {
