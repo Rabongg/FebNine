@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM  --platform=linux/x86-64 node:16-alpine
 COPY ./ /home/nest
 WORKDIR /home/nest
 RUN yarn 
