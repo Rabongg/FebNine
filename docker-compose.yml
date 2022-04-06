@@ -1,16 +1,16 @@
 version: "3.7"
 services:
-  proxy:
-    container_name: febnine-proxy
-    image: nginx
-    ports:
-      - "8080:80"
-    volumes:
-      - /etc/nginx:/etc/nginx/conf.d
-    networks:
-      - febnine-net
-    depends_on:
-      - web
+  # proxy:
+  #   container_name: febnine-proxy
+  #   image: nginx
+  #   ports:
+  #     - "8080:80"
+  #   volumes:
+  #     - /etc/nginx:/etc/nginx/conf.d
+  #   networks:
+  #     - febnine-net
+  #   depends_on:
+  #     - web
   web:
     container_name: febnine
     build:
@@ -23,7 +23,7 @@ services:
   mysql:
     container_name: febnine-mysql
     # mac m1칩의 경우
-    platform: linux/x86_64
+    # platform: linux/x86_64
     image: mysql
     env_file:
       - .env.production
