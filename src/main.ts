@@ -9,9 +9,7 @@ import { HttpExceptionFilter } from './http-exception.filter';
 import { MyLogger } from './logger/logger.service';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-    logger: false,
-  });
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.use(
     helmet.contentSecurityPolicy({
