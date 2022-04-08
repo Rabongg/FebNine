@@ -3,7 +3,6 @@ import { ConfigService } from '@nestjs/config';
 import { S3 } from 'aws-sdk';
 import * as randomstring from 'randomstring';
 import * as sharp from 'sharp';
-import * as webpConverter from 'webp-converter';
 import { FileImageType } from './enum/file-image.enum';
 
 @Injectable()
@@ -62,8 +61,8 @@ export class S3Service {
           Bucket: `${this.AWS_S3_BUCKET}/food/${type}`,
           // Body: file.buffer,
           Body: await this.convertToWebp(file.buffer, type),
-          Key: `${randomstring.generate()}.avif`,
-          ContentType: `avif`,
+          Key: `${randomstring.generate()}.webp`,
+          ContentType: `webp`,
         })
         .promise();
       return path.Key;
@@ -75,13 +74,16 @@ export class S3Service {
   async convertToWebp(file: Buffer, type: FileImageType) {
     try {
       if (type == FileImageType.content) {
-        return sharp(file).rotate().avif().toBuffer();
+        return sharp(file)
+          .rotate()
+          .resize({ width: 470, height: 450 })
+          .webp()
+          .toBuffer();
       } else {
-        // return sharp(file).resize({ width: 100, height: 100 }).withMetadata();
         return sharp(file)
           .rotate()
           .resize({ width: 100, height: 100 })
-          .avif()
+          .webp()
           .toBuffer();
         // .toFormat('webp');
       }
