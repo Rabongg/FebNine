@@ -6,6 +6,7 @@ import {
   Render,
   UseGuards,
 } from '@nestjs/common';
+import { ApiOperation } from '@nestjs/swagger';
 import { AppService } from './app.service';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 
@@ -28,5 +29,14 @@ export class AppController {
     @Query('url') url: string,
   ) {
     return { place, address, url };
+  }
+
+  @ApiOperation({
+    summary: '검색',
+    description: '음식점 명칭으로 검색하기',
+  })
+  @Get('health')
+  healthCheck() {
+    return 'healthy';
   }
 }
