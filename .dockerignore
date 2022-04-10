@@ -1,3 +1,6 @@
 node_modules
 ormlogs.log
 dist
+nest-cli.json
+logs
+test
