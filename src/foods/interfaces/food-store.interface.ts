@@ -7,8 +7,8 @@ export interface FoodStore {
   location: string;
   createdAt: Date;
   categories: Category[];
-  description?: string;
+  description: string;
   grade: number;
-  site?: string;
+  site: string;
   images: FoodImage[];
 }
