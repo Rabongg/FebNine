@@ -68,8 +68,8 @@ export class FoodsService {
     try {
       let query = this.foodRepository
         .createQueryBuilder('food')
-        .leftJoinAndSelect('food.categories', 'food_category')
-        .leftJoinAndSelect('food.images', 'food_image')
+        .innerJoinAndSelect('food.categories', 'food_category')
+        .innerJoinAndSelect('food.images', 'food_image')
         .select([
           'food.id',
           'food.name',
@@ -86,8 +86,8 @@ export class FoodsService {
       }
       return await query
         .orderBy('food.createdAt', 'DESC')
-        .offset((page - 1) * limit)
-        .limit(limit)
+        .skip((page - 1) * limit)
+        .take(limit)
         .getMany();
     } catch (err) {
       throw new NotFoundException('조회할 수 없습니다.');
