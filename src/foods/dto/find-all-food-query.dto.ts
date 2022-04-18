@@ -1,20 +1,18 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { IsEnum, IsNumber, IsOptional, Min } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
 import { FoodCategoryType } from '../enum/food-category.enum';
 
 export class FindAllFoodQueryDto {
   @IsNumber()
-  @ApiProperty({ default: 1, required: false, description: 'skip 할 숫자' })
   @Min(1)
-  @Type(() => Number)
-  page?: number;
+  @ApiProperty({ description: 'skip 할 숫자' })
+  page: number = 1;
 
   @IsNumber()
-  @ApiProperty({ default: 10, required: false, description: 'limit 할 숫자' })
   @Min(0)
-  @Type(() => Number)
-  limit?: number;
+  @ApiProperty({ description: 'limit 할 숫자' })
+  limit: number = 0;
 
   @IsEnum(FoodCategoryType)
   @IsOptional()
@@ -24,5 +22,5 @@ export class FindAllFoodQueryDto {
     required: false,
     description: '가게 카테고리',
   })
-  category?: FoodCategoryType;
+  category: FoodCategoryType = undefined;
 }
