@@ -11,6 +11,7 @@ import {
   Render,
   UseInterceptors,
   UploadedFiles,
+  UseGuards,
 } from '@nestjs/common';
 import { FoodsService } from './foods.service';
 import { CreateFoodDto } from './dto/create-food.dto';
@@ -18,6 +19,7 @@ import { UpdateFoodDto } from './dto/update-food.dto';
 import { FindAllFoodQueryDto } from './dto/find-all-food-query.dto';
 import { ApiConsumes, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import { JwtAuthGuard } from '@src/auth/jwt-auth.guard';
 
 @ApiTags('음식점 API')
 @Controller('foods')
@@ -35,6 +37,7 @@ export class FoodsController {
       { name: 'content', maxCount: 5 },
     ]),
   )
+  @UseGuards(JwtAuthGuard)
   @Post()
   create(
     @UploadedFiles()
@@ -75,6 +78,7 @@ export class FoodsController {
     summary: '음식점 수정',
     description: '음식점 수정',
   })
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -83,6 +87,7 @@ export class FoodsController {
     return this.foodsService.update(id, updateFoodDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.foodsService.remove(id);
