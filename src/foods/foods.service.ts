@@ -31,22 +31,22 @@ export class FoodsService {
       const categories: Category[] = [];
       const images: FoodImage[] = [];
       tag.forEach((value) => {
-        if (value == 1) categories.push({ id: 1, tag: FoodCategoryType.bar });
+        if (value == 1) categories.push({ id: 1, tag: FoodCategoryType.BAR });
         else if (value == 2)
-          categories.push({ id: 2, tag: FoodCategoryType.cafe });
-        else categories.push({ id: 3, tag: FoodCategoryType.food });
+          categories.push({ id: 2, tag: FoodCategoryType.CAFE });
+        else categories.push({ id: 3, tag: FoodCategoryType.FOOD });
       });
       const imagePath = await this.s3Service.filesUpload(files);
       imagePath.forEach((value) => {
         if ('thumbnail' in value)
           images.push({
             url: value.thumbnail,
-            type: FoodImageType.thumbnail,
+            type: FoodImageType.THUMBNAIL,
           });
         else
           images.push({
             url: value.content,
-            type: FoodImageType.content,
+            type: FoodImageType.CONTENT,
           });
       });
       const food = await this.foodRepository.save({
@@ -112,7 +112,7 @@ export class FoodsService {
           'food_image.url',
         ])
         .where('food.id = :id', { id: id })
-        .andWhere('food_image.type = :type', { type: FoodImageType.content })
+        .andWhere('food_image.type = :type', { type: FoodImageType.CONTENT })
         .getOne();
       if (!foodData) throw new NotFoundException('조회할 수 없습니다.');
       return foodData;

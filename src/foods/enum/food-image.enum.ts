@@ -1,4 +1,4 @@
 export enum FoodImageType {
-  thumbnail = '썸네일',
-  content = '내용',
+  THUMBNAIL = '썸네일',
+  CONTENT = '내용',
 }
