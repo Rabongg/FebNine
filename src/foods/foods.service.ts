@@ -14,6 +14,7 @@ import { FoodCategoryType } from './enum/food-category.enum';
 import { S3Service } from '@src/s3/s3.service';
 import { FoodImage } from './interfaces/food-image.interface';
 import { FoodImageType } from './enum/food-image.enum';
+import { FoodRegionType } from './enum/food-region.enum';
 
 @Injectable()
 export class FoodsService {
@@ -62,6 +63,8 @@ export class FoodsService {
 
   async findAll(
     category: FoodCategoryType,
+    region: FoodRegionType,
+    keyword: string,
     page: number,
     limit: number,
   ): Promise<FoodStore[]> {
@@ -81,9 +84,21 @@ export class FoodsService {
           'food_image.url',
           'food_image.type',
         ]);
+
       if (category) {
         query = query.where('food_category.tag = :tag', { tag: category });
       }
+      if (region) {
+        query = query.where('food.location like :region', {
+          region: `%${region}%`,
+        });
+      }
+      if (keyword) {
+        query = query.where('food.name like :keyword', {
+          keyword: `%${keyword}%`,
+        });
+      }
+
       return await query
         .orderBy('food.createdAt', 'DESC')
         .skip((page - 1) * limit)

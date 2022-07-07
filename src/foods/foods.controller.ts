@@ -58,8 +58,14 @@ export class FoodsController {
   @Render('food')
   @Get()
   async findAll(@Query() query: FindAllFoodQueryDto) {
-    const { page, limit, category } = query;
-    const data = await this.foodsService.findAll(category, page, limit);
+    const { page, limit, category, region, keyword } = query;
+    const data = await this.foodsService.findAll(
+      category,
+      region,
+      keyword,
+      page,
+      limit,
+    );
     return { data };
   }
 

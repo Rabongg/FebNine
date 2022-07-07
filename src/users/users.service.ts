@@ -22,7 +22,7 @@ export class UsersService {
       const encryptPassword = await Hash.encrypt(password);
       await this.userRepository.save({ username, password: encryptPassword });
     } catch (err) {
-      throw new ConflictException('문재가 발생했습니다.');
+      throw new ConflictException('문제가 발생했습니다.');
     }
   }
 
