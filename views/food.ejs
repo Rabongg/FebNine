@@ -20,7 +20,7 @@
       <div class="col-lg-12">
         <div class="section-title text-center">
           <div class="title-text">
-            <h2>Febnine</h2>
+            <a href="/"><h2>Febnine</h2></a>
           </div>
           <p>
             맛집을 검색하고 자신만의 맛집 리스트를 만들어 보세요
@@ -39,34 +39,35 @@
           </li>
         </ul>
         <div>
-          <form action="#" class="career-form mb-60">
+          <form class="career-form mb-60" accept-charset="utf-8" action="/foods" method="get">
             <div class="row">
               <div class="col-md-6 col-lg-3 my-3">
                 <div class="input-group position-relative">
-                  <input type="text" class="form-control" placeholder="Enter Your Keywords" id="keywords">
+                  <input name="keyword" type="text" class="form-control" placeholder="Enter Your Keywords" id="keywords">
                 </div>
               </div>
               <div class="col-md-6 col-lg-3 my-3">
                 <div class="select-container">
-                  <select class="custom-select">
-                  <option selected="">Location</option>
-                  <option value="1">서울</option>
-                  <option value="2">경기도</option>
+                  <select name="region" class="custom-select">
+                    <option selected disabled hidden>Location</option>
+                    <option value="서울">서울</option>
+                    <option value="경기">경기</option>
+                    <option value="제주">제주</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-6 col-lg-3 my-3">
                 <div class="select-container">
-                  <select class="custom-select">
-                    <option selected="">Select Food Type</option>
-                    <option value="food">음식점</option>
-                    <option value="bar">술집</option>
-                    <option value="cafe">카페</option>
+                  <select name="category" class="custom-select">
+                    <option selected disabled hidden>Select Food Type</option>
+                    <option value="음식점">음식점</option>
+                    <option value="술집">술집</option>
+                    <option value="카페">카페</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-6 col-lg-3 my-3">
-                <button type="button" class="btn btn-lg btn-block btn-light btn-custom" id="contact-submit">
+                <button type="submit" class="btn btn-lg btn-block btn-light btn-custom" id="contact-submit">
                   Search
                 </button>
               </div>
