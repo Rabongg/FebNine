@@ -196,14 +196,32 @@ body{margin-top:20px;}
     -o-transition: all 0.4s;
     transition: all 0.4s;
 }
+
+.cate {
+  color: #252525;
+    font-size: 16px;
+    margin-left: 10px;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.cate:before {
+    content: "\f54f";
+    font-family: fontawesome;
+    padding-right: 5px;
+}
+
 .event-schedule-area-two .tab-content .table tbody tr td .event-wrap .categories a:before {
     content: "\f54f";
     font-family: fontawesome;
     padding-right: 5px;
 }
+
 .event-schedule-area-two .tab-content .table tbody tr td .event-wrap .time span {
     color: #252525;
 }
+
 .event-schedule-area-two .tab-content .table tbody tr td .event-wrap .organizers {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
