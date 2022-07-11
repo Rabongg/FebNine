@@ -197,7 +197,7 @@ body{margin-top:20px;}
     transition: all 0.4s;
 }
 .event-schedule-area-two .tab-content .table tbody tr td .event-wrap .categories a:before {
-    content: "\f07b";
+    content: "\f54f";
     font-family: fontawesome;
     padding-right: 5px;
 }
@@ -221,7 +221,7 @@ body{margin-top:20px;}
     color: #4125dd;
 }
 .event-schedule-area-two .tab-content .table tbody tr td .event-wrap .organizers a:before {
-    content: "\f007";
+    content: "\f0e8";
     font-family: fontawesome;
     padding-right: 5px;
 }
@@ -298,6 +298,8 @@ body{margin-top:20px;}
   top: calc(50% - 14px);
   font-size: 18px;
   color: #ffffff;
-  content: '\F2F9';
-  font-family: "Material-Design-Iconic-Font";
+  content: '\f041';
+  font-family: fontawesome;
   }
+
+  
