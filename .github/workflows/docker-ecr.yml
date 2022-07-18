@@ -28,6 +28,23 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
     
+    - name: Create .env file for production
+      env:
+        ENV_FILE: .env.production
+      run: |
+         touch $ENV_FILE
+         echo MYSQL_HOST=${{ secrets.MYSQL_HOST }} >> $ENV_FILE
+         echo MYSQL_PORT=${{ secrets.MYSQL_PORT }} >> $ENV_FILE
+         echo MYSQL_USER=${{ secrets.MYSQL_USER }} >> $ENV_FILE
+         echo MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} >> $ENV_FILE
+         echo MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }} >> $ENV_FILE
+         echo KAKAO_REST_API_KEY=${{ secrets.KAKAO_KEY }} >> $ENV_FILE
+         ehco AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }} >> $ENV_FILE
+         echo AWS_SECRET_KEY=${{ secrets.AWS_SECRET_KEY }} >> $ENV_FILE
+         echo S3_BUCKET=${{ secrets.S3_BUCKET }} >> $ENV_FILE
+         echo S3_URL=${{ secrets.S3_URL }} >> $ENV_FILE
+         echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> $ENV_FILE
+         cat $ENV_FILE
 
     - name: Build, tag, and push Dokcer image to Amazon ECR
       env:
@@ -64,7 +81,9 @@ jobs:
            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
            aws-region: ap-northeast-2
            instance-ids: ${{ secrets.REMOTE_HOST }}
-           command: docker service update --replicas 2 febnine
+           command: |
+            docker pull ${{ secrets.AWS_ECR_REGISTRY }}/$ECR_REPOSITORY:$IMAGE_TAG
+            docker service update --force febnine
            working-directory: /home/${{ secrets.REMOTE_USER }}
       
           
