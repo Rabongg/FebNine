@@ -47,18 +47,15 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
       
-      - name: Start SSH
-        uses: Tofandel/ssh-server-action@v1.0.0
+      - name: AWS SSM Send-Command
+        uses: peterkimzz/aws-ssm-send-command@v1.1.1
         with:
-          public_key: ${{ secrets.SSH_PEM }}
-          hostname: ${{ secrets.REMOTE_HOST }}
-          user_name: ${{ secrets.REMOTE_USER }}
-          port: ${{ secrets.REMOTE_PORT }}
-      
-      - name: test
-        run: |
-          whoami
-          ls
+           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+           aws-region: ap-northeast-2
+           instance-ids: ${{ secrets.REMOTE_HOST }}
+           command: whoami
+           working-directory: /home/${{ secrets.REMPTE_USER }}
       
           
           
