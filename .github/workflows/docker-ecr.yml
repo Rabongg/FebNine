@@ -85,7 +85,10 @@ jobs:
            command: |
              aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_REGISTRY }}
              docker pull ${{ secrets.AWS_ECR_REGISTRY }}/$ECR_REPOSITORY:$IMAGE_TAG
-             docker service update --force febnine
+             if [ "$( docker container inspect -f '{{.State.Running}}' febnine )" == "true" ];  \
+             then docker service create -p 3000:3000 --name febnine ${{ secrets.AWS_ECR_REGISTRY }}/$ECR_REPOSITORY:$IMAGE_TAG; \
+             else docker service update --force febnine; \
+             fi
           
           
           
