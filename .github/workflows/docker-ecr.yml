@@ -61,7 +61,7 @@ jobs:
            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
            aws-region: ap-northeast-2
            instance-ids: ${{ secrets.REMOTE_HOST }}
-           command: cat > log.txt
+           command: docker service update --force febnine
            working-directory: /home/${{ secrets.REMOTE_USER }}
       
           
