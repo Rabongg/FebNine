@@ -84,7 +84,7 @@ jobs:
            working-directory: /home/${{ secrets.REMOTE_USER }}
            command: |
              aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_REGISTRY }}
-             docker pull $${{ secrets.AWS_ECR_REGISTRY }}/$ECR_REPOSITORY:$IMAGE_TAG
+             docker pull ${{ secrets.AWS_ECR_REGISTRY }}/$ECR_REPOSITORY:$IMAGE_TAG
              docker service update --force febnine
           
           
