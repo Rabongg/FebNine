@@ -39,7 +39,7 @@ jobs:
          echo MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} >> $ENV_FILE
          echo MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }} >> $ENV_FILE
          echo KAKAO_REST_API_KEY=${{ secrets.KAKAO_KEY }} >> $ENV_FILE
-         ehco AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }} >> $ENV_FILE
+         echo AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }} >> $ENV_FILE
          echo AWS_SECRET_KEY=${{ secrets.AWS_SECRET_KEY }} >> $ENV_FILE
          echo S3_BUCKET=${{ secrets.S3_BUCKET }} >> $ENV_FILE
          echo S3_URL=${{ secrets.S3_URL }} >> $ENV_FILE
