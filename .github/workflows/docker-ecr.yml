@@ -64,9 +64,7 @@ jobs:
            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
            aws-region: ap-northeast-2
            instance-ids: ${{ secrets.REMOTE_HOST }}
-           command: |
-             docker pull ${{ secrets.AWS_ECR_REGISTRY }}/$ECR_REPOSITORY:$IMAGE_TAG
-             docker service update --force febnine
+           command: docker service update --replicas 2 febnine
            working-directory: /home/${{ secrets.REMOTE_USER }}
       
           
