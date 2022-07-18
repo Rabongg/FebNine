@@ -73,16 +73,13 @@ jobs:
   
       - name: AWS SSM Send-Command
         uses: peterkimzz/aws-ssm-send-command@v1.1.1
-        env: 
-           ECR_REPOSITORY: rabong
-           IMAGE_TAG: latest
         with:
            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
            aws-region: ap-northeast-2
            instance-ids: ${{ secrets.REMOTE_HOST }}
-           command: /bin/bash start.sh
            working-directory: /home/${{ secrets.REMOTE_USER }}
+           command: /bin/bash start.sh
       
           
           
