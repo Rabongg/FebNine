@@ -62,7 +62,7 @@ jobs:
            aws-region: ap-northeast-2
            instance-ids: ${{ secrets.REMOTE_HOST }}
            command: whoami
-           working-directory: /home/${{ secrets.REMPTE_USER }}
+           working-directory: /home/${{ secrets.REMOTE_USER }}
       
           
           
