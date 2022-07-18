@@ -4,3 +4,4 @@ dist
 nest-cli.json
 logs
 test
+.github
