@@ -26,7 +26,7 @@ export class FoodsService {
     private readonly s3Service: S3Service,
   ) {}
 
-  async create(files: any, createFoodDto: CreateFoodDto) {
+  async create(files: any, createFoodDto: CreateFoodDto): Promise<number> {
     try {
       const { tag } = createFoodDto;
       const categories: Category[] = [];
@@ -50,12 +50,12 @@ export class FoodsService {
             type: FoodImageType.CONTENT,
           });
       });
-      const food = await this.foodRepository.save({
+      const food: Food = await this.foodRepository.save({
         ...createFoodDto,
         categories,
         images,
       });
-      return food;
+      return food.id;
     } catch (err) {
       throw new ConflictException('Cannot create food');
     }
