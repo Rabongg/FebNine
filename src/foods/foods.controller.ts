@@ -46,7 +46,7 @@ export class FoodsController {
       content: Express.Multer.File[];
     },
     @Body() createFoodDto: CreateFoodDto,
-  ) {
+  ): Promise<number> {
     return this.foodsService.create(files, createFoodDto);
   }
 

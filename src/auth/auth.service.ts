@@ -6,7 +6,7 @@ import { AuthUser } from './interfaces/auth-user.interface';
 export class AuthService {
   constructor(private jwtService: JwtService) {}
 
-  async login(user: AuthUser) {
+  async login(user: AuthUser): Promise<string> {
     const payload = { username: user.username, sub: user.id };
     return this.jwtService.sign(payload);
   }
